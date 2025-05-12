@@ -37,26 +37,37 @@ if (document.getElementById('appointmentList')) {
   const allAppointments = JSON.parse(localStorage.getItem(appointmentsKey)) || [];
 
   const list = document.getElementById('appointmentList');
-  list.innerHTML = allAppointments.length === 0
-    ? "<li>No previous appointments found.</li>"
-    : "";
+  list.innerHTML = "";
 
-allAppointments.forEach((appt, index) => {
-  const service = appt.service || 'Unknown Service';
-  const date = appt.date || 'Unknown Date';
-  const time = appt.time || 'Unknown Time';
+  if (allAppointments.length === 0) {
+    list.innerHTML = "<li>No previous appointments found.</li>";
+  } else {
+    allAppointments.forEach((appt, index) => {
+      // Safety: fallback in case of bad data
+      const service = appt?.service || "Unknown";
+      const date = appt?.date || "Unknown";
+      const time = appt?.time || "Unknown";
 
-  const li = document.createElement("li");
-  li.innerHTML = `
-    <div class="appointment-info">
-      <strong>Service:</strong> ${service}<br>
-      <strong>Date:</strong> ${date}<br>
-      <strong>Time:</strong> ${time}
-    </div>
-    <button onclick="deleteAppointment(${index})" class="btn btn-delete">Delete</button>
-  `;
-  list.appendChild(li);
-});
+      const li = document.createElement("li");
+      li.classList.add("appointment-item");
+      li.innerHTML = `
+        <div class="appointment-info">
+          <strong>Service:</strong> ${service}<br>
+          <strong>Date:</strong> ${date}<br>
+          <strong>Time:</strong> ${time}
+        </div>
+        <button onclick="deleteAppointment(${index})" class="btn btn-delete">Delete</button>
+      `;
+      list.appendChild(li);
+    });
+  }
+
+  window.deleteAppointment = function(index) {
+    const updated = allAppointments.filter((_, i) => i !== index);
+    localStorage.setItem(appointmentsKey, JSON.stringify(updated));
+    location.reload();
+  };
+}
 
 
   window.deleteAppointment = function (index) {
