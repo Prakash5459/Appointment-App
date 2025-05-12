@@ -1,4 +1,4 @@
-/* Base Reset */
+/* === BASE RESET === */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -12,12 +12,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #222;
 }
 
 .container {
-  background: rgba(255, 255, 255, 0.15); /* semi-transparent */
+  background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px); /* for Safari */
+  -webkit-backdrop-filter: blur(10px);
   padding: 2rem;
   border-radius: 16px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
@@ -27,76 +28,11 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.98); }
-  to { opacity: 1; transform: scale(1); }
-}
-
+/* === TYPOGRAPHY === */
 h2, h3 {
   color: #333;
   margin-bottom: 1rem;
   text-align: center;
-}
-
-input, select {
-  width: 100%;
-  padding: 0.75rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 1rem;
-  transition: border 0.2s ease-in-out;
-}
-
-input:focus, select:focus {
-  border-color: #007BFF;
-  outline: none;
-}
-
-button {
-  width: 100%;
-  padding: 0.75rem;
-  background-color: #007BFF;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-.btn {
-  padding: 0.6rem 1rem;
-  border: none;
-  border-radius: 8px;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.btn-logout {
-  background-color: #dc3545;
-  color: white;
-  margin-bottom: 20px;
-}
-
-.btn-logout:hover {
-  background-color: #c82333;
-}
-
-.btn-delete {
-  background-color: #6c757d;
-  color: white;
-  margin-left: 10px;
-}
-
-.btn-delete:hover {
-  background-color: #5a6268;
 }
 
 p {
@@ -109,17 +45,70 @@ a {
   color: #007BFF;
   text-decoration: none;
 }
-
 a:hover {
   text-decoration: underline;
 }
 
+/* === FORMS & INPUTS === */
+input, select {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border 0.2s ease-in-out;
+}
+input:focus, select:focus {
+  border-color: #007BFF;
+  outline: none;
+}
+
+/* === BUTTONS === */
+button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+button:hover {
+  background-color: #0056b3;
+}
+.btn {
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.btn-logout {
+  background-color: #dc3545;
+  color: white;
+  margin-bottom: 20px;
+}
+.btn-logout:hover {
+  background-color: #c82333;
+}
+.btn-delete {
+  background-color: #6c757d;
+  color: white;
+}
+.btn-delete:hover {
+  background-color: #5a6268;
+}
+
+/* === APPOINTMENT LIST === */
 #appointmentList {
   list-style: none;
   padding: 0;
   margin-top: 1rem;
 }
-
 #appointmentList li {
   background: #f8f9fa;
   padding: 1rem;
@@ -129,26 +118,30 @@ a:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  gap: 1rem;
+}
+.appointment-info {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* Animated Confirmation */
+/* === ANIMATION: Confirmation Box === */
 .animate-confirm {
   animation: slideUpFade 0.6s ease-out;
 }
-
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
 @keyframes slideUpFade {
-  from {
-    transform: translateY(30px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0px);
-    opacity: 1;
-  }
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0px); opacity: 1; }
 }
 
-/* Toast Popup */
+/* === TOAST NOTIFICATION === */
 .toast {
   position: fixed;
   bottom: 20px;
@@ -165,25 +158,22 @@ a:hover {
   transition: opacity 0.5s ease, transform 0.5s ease;
   z-index: 9999;
 }
-
 .toast.show {
   opacity: 1;
   pointer-events: auto;
   transform: translateX(-50%) translateY(0);
 }
 
-/* Toggle Switch */
+/* === DARK MODE TOGGLE SWITCH === */
 .toggle-switch {
   position: fixed;
   top: 20px;
   right: 20px;
   z-index: 1000;
 }
-
 .toggle-switch input {
   display: none;
 }
-
 .toggle-switch .slider {
   width: 50px;
   height: 26px;
@@ -194,7 +184,6 @@ a:hover {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-
 .toggle-switch .slider::before {
   content: "";
   width: 20px;
@@ -206,33 +195,30 @@ a:hover {
   left: 4px;
   transition: transform 0.3s ease;
 }
-
 .toggle-switch input:checked + .slider {
   background-color: #333;
 }
-
 .toggle-switch input:checked + .slider::before {
   transform: translateX(24px);
 }
 
-/* Dark mode styles */
-/* DARK MODE OVERRIDES */
+/* === DARK MODE OVERRIDES === */
 body.dark-mode {
   background: #121212;
   color: #f1f1f1;
 }
-
 body.dark-mode .container {
   background: rgba(30, 30, 30, 0.4);
   color: #f1f1f1;
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
-
+body.dark-mode h1,
 body.dark-mode h2,
 body.dark-mode h3,
 body.dark-mode label,
 body.dark-mode p,
-body.dark-mode a {
+body.dark-mode a,
+body.dark-mode span {
   color: #f1f1f1;
 }
 body.dark-mode input,
@@ -242,7 +228,6 @@ body.dark-mode textarea {
   color: #ffffff;
   border: 1px solid #444;
 }
-
 body.dark-mode input::placeholder,
 body.dark-mode select::placeholder,
 body.dark-mode textarea::placeholder {
@@ -253,14 +238,11 @@ body.dark-mode button {
   background-color: #444;
   color: white;
 }
-
 body.dark-mode .btn:hover,
 body.dark-mode button:hover {
   background-color: #666;
 }
 body.dark-mode #appointmentList li {
-  background: rgba(255, 255, 255, 0.05);
-  color: #f1f1f1;
-  box-shadow: 0 2px 6px rgba(255, 255, 255, 0.05);
+  background-color: #1e1e1e;
+  border: 1px solid #333;
 }
-

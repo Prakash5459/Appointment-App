@@ -4,7 +4,7 @@ if (!localStorage.getItem('loggedInUser') && window.location.pathname.includes('
   window.location.href = 'index.html';
 }
 
-// BOOKING FORM SUBMIT
+// Booking form logic
 if (document.getElementById('bookingForm')) {
   document.getElementById('bookingForm').addEventListener('submit', function (e) {
     e.preventDefault();
@@ -14,65 +14,53 @@ if (document.getElementById('bookingForm')) {
     const time = document.getElementById('time').value;
     const email = localStorage.getItem('loggedInUser');
 
-    if (!email) {
-      alert("You are not logged in.");
-      return;
-    }
-
-    if (!service || !date || !time) {
-      alert("Please fill all fields.");
+    if (!email || !service || !date || !time) {
+      alert("Please fill all fields and make sure you're logged in.");
       return;
     }
 
     const appointment = { service, date, time };
-
-    // Get existing appointments or initialize empty array
     const existing = JSON.parse(localStorage.getItem(`appointments-${email}`)) || [];
-
-    // Add new appointment to array
     existing.push(appointment);
 
-    // Save all appointments and latest separately
     localStorage.setItem(`appointments-${email}`, JSON.stringify(existing));
     localStorage.setItem(`latest-appointment-${email}`, JSON.stringify(appointment));
 
-    // Redirect to confirmation page
     window.location.href = 'confirm.html';
   });
 }
 
-// SHOW PREVIOUS APPOINTMENTS WITH DELETE BUTTONS
+// Show previous appointments
 if (document.getElementById('appointmentList')) {
   const email = localStorage.getItem('loggedInUser');
   const appointmentsKey = `appointments-${email}`;
   const allAppointments = JSON.parse(localStorage.getItem(appointmentsKey)) || [];
 
   const list = document.getElementById('appointmentList');
+  list.innerHTML = allAppointments.length === 0
+    ? "<li>No previous appointments found.</li>"
+    : "";
 
-  if (allAppointments.length === 0) {
-    list.innerHTML = "<li>No previous appointments found.</li>";
-  } else {
-    list.innerHTML = ""; // Clear first
+  allAppointments.forEach((appt, index) => {
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <div class="appointment-info">
+        <strong>${appt.service}</strong><br>
+        on ${appt.date} at ${appt.time}
+      </div>
+      <button onclick="deleteAppointment(${index})" class="btn btn-delete">Delete</button>
+    `;
+    list.appendChild(li);
+  });
 
-    allAppointments.forEach((appt, index) => {
-      const li = document.createElement("li");
-      li.innerHTML = `
-        <strong>${appt.service}</strong> on ${appt.date} at ${appt.time}
-        <button onclick="deleteAppointment(${index})" class="btn btn-delete">Delete</button>
-      `;
-      list.appendChild(li);
-    });
-  }
-
-  // Delete function
-  window.deleteAppointment = function(index) {
+  window.deleteAppointment = function (index) {
     const updated = allAppointments.filter((_, i) => i !== index);
     localStorage.setItem(appointmentsKey, JSON.stringify(updated));
-    location.reload(); // Refresh the list
+    location.reload();
   };
 }
 
-// CONFIRMATION PAGE LOGIC
+// Confirmation page logic (if used elsewhere)
 if (document.getElementById('confirmationDetails')) {
   const email = localStorage.getItem('loggedInUser');
   const appt = JSON.parse(localStorage.getItem(`latest-appointment-${email}`));
@@ -84,9 +72,15 @@ if (document.getElementById('confirmationDetails')) {
       <p><strong>Time:</strong> ${appt.time}</p>
     `;
   }
+
+  const toast = document.getElementById('toast');
+  if (toast) {
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3000);
+  }
 }
 
-// LOGOUT FUNCTION
+// Logout
 function logoutUser() {
   localStorage.removeItem('loggedInUser');
   window.location.href = 'index.html';
