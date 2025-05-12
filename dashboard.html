@@ -1,0 +1,27 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | Appointment App</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>Book Appointment</h2>
+      <h3>Previous Appointments</h3>
+<ul id="appointmentList"></ul>
+    <form id="bookingForm">
+      <select id="service">
+        <option value="">Select Service</option>
+        <option value="Dental Checkup">Dental Checkup</option>
+        <option value="Haircut">Haircut</option>
+        <option value="Eye Test">Eye Test</option>
+      </select>
+      <input type="date" id="date" required />
+      <input type="time" id="time" required />
+      <button type="submit">Book Now</button>
+    </form>
+  </div>
+  <script src="booking.js"></script>
+</body>
+</html>
