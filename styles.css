@@ -23,6 +23,7 @@ input, select, button {
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  font-size: 1rem;
 }
 
 button {
@@ -34,4 +35,54 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+
+/* Reusable button styles */
+.btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* Logout button */
+.btn-logout {
+  background-color: #dc3545;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.btn-logout:hover {
+  background-color: #c82333;
+}
+
+/* Delete button */
+.btn-delete {
+  background-color: #6c757d;
+  color: white;
+  margin-left: 10px;
+}
+
+.btn-delete:hover {
+  background-color: #5a6268;
+}
+
+/* Appointment list styles (optional enhancements) */
+#appointmentList {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+#appointmentList li {
+  background: #f8f9fa;
+  padding: 0.75rem;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  font-size: 0.95rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
