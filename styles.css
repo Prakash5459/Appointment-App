@@ -65,19 +65,23 @@ input:focus, select:focus {
 }
 
 /* === BUTTONS === */
-button {
+button, .btn {
   width: 100%;
-  padding: 0.75rem;
-  background-color: #007BFF;
-  color: white;
-  border: none;
-  border-radius: 8px;
+  padding: 0.85rem;
   font-size: 1rem;
+  border: none;
+  border-radius: 12px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
-button:hover {
-  background-color: #0056b3;
+button[type="submit"] {
+  background: linear-gradient(135deg, #007BFF, #0056b3);
+  color: white;
+}
+button[type="submit"]:hover {
+  background: linear-gradient(135deg, #0056b3, #004095);
 }
 .btn {
   padding: 0.6rem 1rem;
@@ -88,12 +92,15 @@ button:hover {
   transition: background-color 0.2s ease;
 }
 .btn-logout {
-  background-color: #dc3545;
+  background: linear-gradient(135deg, #dc3545, #a71d2a);
   color: white;
-  margin-bottom: 20px;
+  margin-top: 10px;
 }
 .btn-logout:hover {
-  background-color: #c82333;
+  background: linear-gradient(135deg, #a71d2a, #881421);
+}
+form button {
+  margin-bottom: 10px;
 }
 .btn-delete {
   background-color: #6c757d;
