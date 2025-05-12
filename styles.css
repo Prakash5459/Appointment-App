@@ -123,10 +123,11 @@ button:hover {
 }
 .appointment-info {
   flex: 1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  color: inherit;
+  font-size: 0.95rem;
+  line-height: 1.4;
 }
+
 
 /* === ANIMATION: Confirmation Box === */
 .animate-confirm {
