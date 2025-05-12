@@ -41,17 +41,23 @@ if (document.getElementById('appointmentList')) {
     ? "<li>No previous appointments found.</li>"
     : "";
 
-  allAppointments.forEach((appt, index) => {
-    const li = document.createElement("li");
-    li.innerHTML = `
-      <div class="appointment-info">
-        <strong>${appt.service}</strong><br>
-        on ${appt.date} at ${appt.time}
-      </div>
-      <button onclick="deleteAppointment(${index})" class="btn btn-delete">Delete</button>
-    `;
-    list.appendChild(li);
-  });
+allAppointments.forEach((appt, index) => {
+  const service = appt.service || 'Unknown Service';
+  const date = appt.date || 'Unknown Date';
+  const time = appt.time || 'Unknown Time';
+
+  const li = document.createElement("li");
+  li.innerHTML = `
+    <div class="appointment-info">
+      <strong>Service:</strong> ${service}<br>
+      <strong>Date:</strong> ${date}<br>
+      <strong>Time:</strong> ${time}
+    </div>
+    <button onclick="deleteAppointment(${index})" class="btn btn-delete">Delete</button>
+  `;
+  list.appendChild(li);
+});
+
 
   window.deleteAppointment = function (index) {
     const updated = allAppointments.filter((_, i) => i !== index);
