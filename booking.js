@@ -28,18 +28,37 @@ if (document.getElementById('bookingForm')) {
   });
 }
 // SHOW PREVIOUS APPOINTMENTS
+// SHOW PREVIOUS APPOINTMENTS WITH DELETE BUTTONS
 if (document.getElementById('appointmentList')) {
   const email = localStorage.getItem('loggedInUser');
-  const allAppointments = JSON.parse(localStorage.getItem(`appointments-${email}`)) || [];
+  const appointmentsKey = `appointments-${email}`;
+  const allAppointments = JSON.parse(localStorage.getItem(appointmentsKey)) || [];
+
+  const list = document.getElementById('appointmentList');
 
   if (allAppointments.length === 0) {
-    document.getElementById('appointmentList').innerHTML = "<li>No previous appointments found.</li>";
+    list.innerHTML = "<li>No previous appointments found.</li>";
   } else {
-    document.getElementById('appointmentList').innerHTML = allAppointments
-      .map(appt => `<li><strong>${appt.service}</strong> on ${appt.date} at ${appt.time}</li>`)
-      .join('');
+    list.innerHTML = ""; // Clear first
+
+    allAppointments.forEach((appt, index) => {
+      const li = document.createElement("li");
+      li.innerHTML = `
+        <strong>${appt.service}</strong> on ${appt.date} at ${appt.time}
+      <button onclick="deleteAppointment(${index})" class="btn btn-delete">Delete</button>
+      `;
+      list.appendChild(li);
+    });
+  }
+
+  // Delete function
+  window.deleteAppointment = function(index) {
+    const updated = allAppointments.filter((_, i) => i !== index);
+    localStorage.setItem(appointmentsKey, JSON.stringify(updated));
+    location.reload(); // Reload page to refresh list
   }
 }
+
 
 // Confirmation logic
 if (document.getElementById('confirmationDetails')) {
@@ -53,3 +72,10 @@ if (document.getElementById('confirmationDetails')) {
     `;
   }
 }
+
+function logoutUser() {
+  localStorage.removeItem('loggedInUser');
+  window.location.href = 'index.html';
+}
+
+
