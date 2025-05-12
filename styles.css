@@ -1,64 +1,94 @@
-body {
-  font-family: Arial, sans-serif;
-  background: #f4f4f4;
+/* Base Reset */
+* {
+  box-sizing: border-box;
   margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f9f9f9, #e3e3e3);
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
 
 .container {
-  background: white;
+  background: rgba(255, 255, 255, 0.15); /* semi-transparent */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* for Safari */
   padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 300px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 420px;
+  animation: fadeIn 0.4s ease-in-out;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-input, select, button {
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+h2, h3 {
+  color: #333;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+input, select {
   width: 100%;
-  padding: 0.5rem;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 8px;
   font-size: 1rem;
+  transition: border 0.2s ease-in-out;
+}
+
+input:focus, select:focus {
+  border-color: #007BFF;
+  outline: none;
 }
 
 button {
+  width: 100%;
+  padding: 0.75rem;
   background-color: #007BFF;
   color: white;
   border: none;
+  border-radius: 8px;
+  font-size: 1rem;
   cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 button:hover {
   background-color: #0056b3;
 }
 
-/* Reusable button styles */
 .btn {
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   font-size: 0.95rem;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease;
 }
 
-/* Logout button */
 .btn-logout {
   background-color: #dc3545;
   color: white;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .btn-logout:hover {
   background-color: #c82333;
 }
 
-/* Delete button */
 .btn-delete {
   background-color: #6c757d;
   color: white;
@@ -69,20 +99,35 @@ button:hover {
   background-color: #5a6268;
 }
 
-/* Appointment list styles (optional enhancements) */
+p {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+a {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 #appointmentList {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
-  margin-top: 20px;
+  margin-top: 1rem;
 }
 
 #appointmentList li {
   background: #f8f9fa;
-  padding: 0.75rem;
+  padding: 1rem;
   margin-bottom: 10px;
-  border-radius: 5px;
+  border-radius: 10px;
   font-size: 0.95rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
